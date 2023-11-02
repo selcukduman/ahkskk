@@ -1,0 +1,7 @@
+1: en - United Kingdom
+0x08090809
+2: en - US
+0x04090409
+3: tr - Turkish Q
+0x041f041f
+
