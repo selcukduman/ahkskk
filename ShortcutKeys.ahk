@@ -34,83 +34,35 @@ SetTitleMatchMode, 2 ; 2 = a partial match on the title
 ;\::Send {End}{Delete}{Space}{End}
 
 ; Dell Keyboard HAcks
+dell := 0
+#!k::
+    dell:=!dell ;not! toggle
+return
 
-$F11::Send {Home}
-$F12::Send {End}
-$Home::Send {F11}
-$End::Send {F12}
-$!F11::Send !{Home}
-$!F12::Send !{End}
-$!Home::Send !{F11}
-$!End::Send !{F12}
-$+F11::Send +{Home}
-$+F12::Send +{End}
-$+Home::Send +{F11}
-$+End::Send +{F12}
-$^F11::Send ^{Home}
-$^F12::Send ^{End}
-$^Home::Send ^{F11}
-$^End::Send ^{F12}
+#If dell ; All hotkeys below this line will only work if dell is TRUE
+  F11::Home
+  F12::End
+  Home::F11
+  End::F12
+#If
 
 ; OMOTON Keyboard Hacks
-$"::Send {@}
-$@::Send "
->!<^3::Send {#}
-$#::Send {\}
-$~::Send {|}
-$¬::Send {~}
-SC132::Esc
-Rwin::RControl
+; omoton := 0
+; #!k::
+;     omoton:=!dell ;not! toggle
+; return
 
+; #If omoton ; All hotkeys below this line will only work if omoton is TRUE
+;   "::@
+;   @::"
+;   >!<^3::Send {#}
+;   #::\
+;   ~::|
+;   ¬::~
+;   SC132::Esc
+;   Rwin::RControl
+; #If
 ;End of Keyboard hacks
-
-#!MouseGetPos, X, YMouseMove, % 2560, % 1440, 0
-settimer, lbl, 500
-return
-lbl:
-if (A_TimeIdlePhysical < 250)
-    {
-        MouseMove, % X, % Y, 0
-    exitapp }
-    MouseGetPos, X, YMouseMove, % 2560, % 1440, 0
-    settimer, lbl, 500
-    return
-    lbl:
-    if (A_TimeIdlePhysical < 250)
-        {
-            MouseMove, % X, % Y, 0
-        exitapp }
-        MouseGetPos, X, YMouseMove, % 2560, % 1440, 0
-        settimer, lbl, 500
-        return
-        lbl:
-        if (A_TimeIdlePhysical < 250)
-            {
-                MouseMove, % X, % Y, 0
-            exitapp }
-            MouseGetPos, X, YMouseMove, % 2560, % 1440, 0
-            settimer, lbl, 500
-            return
-            lbl:
-            if (A_TimeIdlePhysical < 250)
-                {
-                    MouseMove, % X, % Y, 0
-                exitapp }
-                MouseGetPos, X, p::
-MouseGetPos, X, Y
-MouseMove, % 2560, % 1440, 0
-settimer, lbl, 500
-return
-
-lbl:
-if (A_TimeIdlePhysical < 250)
-	{
-	MouseMove, % X, % Y, 0
-	exitapp
-	}
-
-
-
 
 ; TipGuiEscape:
 ; ExitApp
@@ -214,7 +166,11 @@ Numlock::SetNumLockState, AlwaysOn
 !^Numpad6::Send V0dafone{!}{Return}
 ;!^Numpad3::Send vodafone{Tab}
 ;!^Numpad9::Send DellBMO1{!}{Return}
-^#o::
+>!4::Send £
+>!>+4::Send €
+
+;Paste Raw Clipboard
+#+o::
 Sleep, 1000
 Send {Raw}%Clipboard%
 Return
@@ -242,7 +198,6 @@ SetTrans:
   Sleep 100
   WinSet, Transparent, %A_ThisMenuItem%, A
 Return
-
 
 
 
